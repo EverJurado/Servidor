@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuarios {
+  id_usuario       Int      @id @default(autoincrement())
+  rol              String?
+  nombre           String?
+  apellidopaterno  String?
+  apellidomaterno  String?
+  email            String?  @unique
+  contrasena       String?
+  foto             String?
+  telefono         Int?
+  pais             String?
+  ciudad           String?
+  genero           String?
+  fechacreacion    DateTime @default(now())
+  verificado       Boolean?
+  reset_token      String?
+
+  agenda           Agenda[]
+}
+
+model Eventos {
+  id_evento         Int                 @id @default(autoincrement())
+  titulo            String?
+  descripcion       String?
+  foto_evento       String?
+  hora_inicio       String?
+  hora_fin          String?
+  fecha             DateTime?
+  costo             String?
+  modalidad         String?
+  ubicacion         String?
+  link_reunion      String?
+  reunion_iniciada  Boolean?
+
+  agenda            Agenda[]
+  expositores       Eventos_Expositores[]
+  patrocinadores    Eventos_Patrocinadores[]
+}
+
+model Expositores {
+  id_expositor  Int                 @id @default(autoincrement())
+  nombre        String?
+  especialidad  String?
+  institucion   String?
+  contacto      String?
+
+  eventos       Eventos_Expositores[]
+}
+
+model Eventos_Expositores {
+  id_evento     Int
+  id_expositor  Int
+
+  evento        Eventos     @relation(fields: [id_evento], references: [id_evento])
+  expositor     Expositores @relation(fields: [id_expositor], references: [id_expositor])
+
+  @@id([id_evento, id_expositor])
+}
+
+model Patrocinadores {
+  id_patrocinador  Int                 @id @default(autoincrement())
+  razon_social     String?
+  institucion      String?
+
+  eventos          Eventos_Patrocinadores[]
+}
+
+model Eventos_Patrocinadores {
+  id_evento        Int
+  id_patrocinador  Int
+
+  evento           Eventos        @relation(fields: [id_evento], references: [id_evento])
+  patrocinador     Patrocinadores @relation(fields: [id_patrocinador], references: [id_patrocinador])
+
+  @@id([id_evento, id_patrocinador])
+}
+
+model Agenda {
+  id_agenda    Int       @id @default(autoincrement())
+  id_usuario   Int
+  id_evento    Int
+  actividad    String?
+  fecha        DateTime?
+  comentario   String?
+  calificacion Int?
+  asistio      Boolean?
+  hora_ingreso DateTime?
+
+  usuario      Usuarios   @relation(fields: [id_usuario], references: [id_usuario])
+  evento       Eventos    @relation(fields: [id_evento], references: [id_evento])
+}
