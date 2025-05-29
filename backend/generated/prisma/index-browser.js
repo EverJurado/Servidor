@@ -161,7 +161,7 @@ exports.Prisma.ExpositoresScalarFieldEnum = {
   contacto: 'contacto'
 };
 
-exports.Prisma.Eventos_ExpositoresScalarFieldEnum = {
+exports.Prisma.Eventos_expositoresScalarFieldEnum = {
   id_evento: 'id_evento',
   id_expositor: 'id_expositor'
 };
@@ -172,7 +172,7 @@ exports.Prisma.PatrocinadoresScalarFieldEnum = {
   institucion: 'institucion'
 };
 
-exports.Prisma.Eventos_PatrocinadoresScalarFieldEnum = {
+exports.Prisma.Eventos_patrocinadoresScalarFieldEnum = {
   id_evento: 'id_evento',
   id_patrocinador: 'id_patrocinador'
 };
@@ -206,13 +206,13 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Usuarios: 'Usuarios',
-  Eventos: 'Eventos',
-  Expositores: 'Expositores',
-  Eventos_Expositores: 'Eventos_Expositores',
-  Patrocinadores: 'Patrocinadores',
-  Eventos_Patrocinadores: 'Eventos_Patrocinadores',
-  Agenda: 'Agenda'
+  usuarios: 'usuarios',
+  eventos: 'eventos',
+  expositores: 'expositores',
+  eventos_expositores: 'eventos_expositores',
+  patrocinadores: 'patrocinadores',
+  eventos_patrocinadores: 'eventos_patrocinadores',
+  agenda: 'agenda'
 };
 
 /**

@@ -8,7 +8,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuarios {
+model usuarios {
   id_usuario      Int      @id @default(autoincrement())
   rol             String?
   nombre          String?
@@ -25,10 +25,10 @@ model Usuarios {
   verificado      Boolean?
   reset_token     String?
 
-  agenda Agenda[]
+  agenda agenda[]
 }
 
-model Eventos {
+model eventos {
   id_evento        Int       @id @default(autoincrement())
   titulo           String?
   descripcion      String?
@@ -42,50 +42,50 @@ model Eventos {
   link_reunion     String?
   reunion_iniciada Boolean?
 
-  agenda         Agenda[]
-  expositores    Eventos_Expositores[]
-  patrocinadores Eventos_Patrocinadores[]
+  agenda         agenda[]
+  expositores    eventos_expositores[]
+  patrocinadores eventos_patrocinadores[]
 }
 
-model Expositores {
+model expositores {
   id_expositor Int     @id @default(autoincrement())
   nombre       String?
   especialidad String?
   institucion  String?
   contacto     String?
 
-  eventos Eventos_Expositores[]
+  eventos eventos_expositores[]
 }
 
-model Eventos_Expositores {
+model eventos_expositores {
   id_evento    Int
   id_expositor Int
 
-  evento    Eventos     @relation(fields: [id_evento], references: [id_evento])
-  expositor Expositores @relation(fields: [id_expositor], references: [id_expositor])
+  evento    eventos     @relation(fields: [id_evento], references: [id_evento])
+  expositor expositores @relation(fields: [id_expositor], references: [id_expositor])
 
   @@id([id_evento, id_expositor])
 }
 
-model Patrocinadores {
+model patrocinadores {
   id_patrocinador Int     @id @default(autoincrement())
   razon_social    String?
   institucion     String?
 
-  eventos Eventos_Patrocinadores[]
+  eventos eventos_patrocinadores[]
 }
 
-model Eventos_Patrocinadores {
+model eventos_patrocinadores {
   id_evento       Int
   id_patrocinador Int
 
-  evento       Eventos        @relation(fields: [id_evento], references: [id_evento])
-  patrocinador Patrocinadores @relation(fields: [id_patrocinador], references: [id_patrocinador])
+  evento       eventos        @relation(fields: [id_evento], references: [id_evento])
+  patrocinador patrocinadores @relation(fields: [id_patrocinador], references: [id_patrocinador])
 
   @@id([id_evento, id_patrocinador])
 }
 
-model Agenda {
+model agenda {
   id_agenda    Int       @id @default(autoincrement())
   id_usuario   Int
   id_evento    Int
@@ -96,6 +96,6 @@ model Agenda {
   asistio      Boolean?
   hora_ingreso DateTime?
 
-  usuario Usuarios @relation(fields: [id_usuario], references: [id_usuario])
-  evento  Eventos  @relation(fields: [id_evento], references: [id_evento])
+  usuario usuarios @relation(fields: [id_usuario], references: [id_usuario])
+  evento  eventos  @relation(fields: [id_evento], references: [id_evento])
 }
