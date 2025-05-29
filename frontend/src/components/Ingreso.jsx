@@ -17,11 +17,7 @@ export const Ingreso = () => {
     e.preventDefault();
     setErrorMessage("");
 
-    const captchaValue = captcha.current.getValue();
-    if (!captchaValue) {
-      setErrorMessage("Por favor, completa el CAPTCHA.");
-      return;
-    }
+    const captchaValue = captcha.current?.getValue() || ""; // <-- puede estar vacío
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
@@ -29,7 +25,7 @@ export const Ingreso = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          captchaToken: captchaValue
+          captchaToken: captchaValue // <-- lo mandas igual pero puede ser ""
         }),
       });
 
@@ -46,13 +42,14 @@ export const Ingreso = () => {
 
       window.location.href =
         data.usuario.id_rol === 3 ? "/dashboard" :
-        data.usuario.id_rol === 2 ? "/expositor" :
-        "/";
+          data.usuario.id_rol === 2 ? "/expositor" :
+            "/";
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       setErrorMessage("Error en el servidor.");
     }
   };
+
 
   return (
     <main>
