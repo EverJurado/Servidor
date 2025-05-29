@@ -6,7 +6,7 @@ export const AgendaEventos = () => {
   const id_usuario = localStorage.getItem("id_usuario");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/agenda/${id_usuario}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/agenda/${id_usuario}`)
       .then(res => res.json())
       .then(data => setEventos(data))
       .catch(err => console.error("Error al cargar agenda:", err));

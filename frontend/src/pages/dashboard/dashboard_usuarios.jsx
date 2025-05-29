@@ -8,7 +8,8 @@ export default function DashboardUsuario() {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/usuarios-por-rol")
+    fetch(`${import.meta.env.VITE_API_URL}/api/usuarios-por-rol`)
+
       .then(res => res.json())
       .then(data => setUsuarios(data))
       .catch(err => console.error("Error al cargar usuarios:", err));

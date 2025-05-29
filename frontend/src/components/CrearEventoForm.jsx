@@ -33,12 +33,12 @@ export const CrearEventoForm = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/expositores")
+        fetch(`${import.meta.env.VITE_API_URL}/api/expositores`)
             .then(res => res.json())
             .then(data => setExpositores(data))
             .catch(err => console.error("Error al cargar expositores:", err));
 
-        fetch("http://localhost:5000/api/patrocinadores")
+        fetch(`${import.meta.env.VITE_API_URL}/api/patrocinadores`)
             .then(res => res.json())
             .then(data => setPatrocinadores(data))
             .catch(err => console.error("Error al cargar patrocinadores:", err));
@@ -83,7 +83,7 @@ export const CrearEventoForm = () => {
         eventData.append("longitud", longitud);
         
         try {
-            const response = await fetch("http://localhost:5000/api/crear-evento", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/crear-evento`, {
             method: "POST",
             body: eventData, // ✅ usamos FormData directamente
             });
