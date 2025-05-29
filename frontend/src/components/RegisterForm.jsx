@@ -69,10 +69,7 @@ export const RegisterForm = () => {
         e.preventDefault();
         setErrorMessage("");
 
-        if (!captcha.current.getValue()) {
-            setErrorMessage("Por favor, completa el CAPTCHA antes de continuar.");
-            return;
-        }
+        const captchaValue = captcha.current?.getValue() || ""; // <-- puede ser vacío
 
         if (
             !formData.nombre.trim() ||
@@ -107,6 +104,7 @@ export const RegisterForm = () => {
                     pais: formData.pais,
                     ciudad: formData.ciudad,
                     genero: formData.genero,
+                    captchaToken: captchaValue // <-- envías el token si existe
                 }),
             });
 
@@ -124,6 +122,7 @@ export const RegisterForm = () => {
             setErrorMessage("Error en el servidor.");
         }
     };
+
 
     return (
         <main>
