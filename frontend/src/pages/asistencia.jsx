@@ -36,12 +36,17 @@ export const Asistencia = () => {
       body: JSON.stringify({ id_usuario, id_evento }),
     });
 
+    const resultado = await resAsistencia.json();
+
     if (resAsistencia.ok) {
       setMensaje("¡Asistencia registrada exitosamente!");
     } else {
-      setMensaje("Hubo un error al registrar tu asistencia.");
+      // Mostrar el mensaje del backend
+      setMensaje(`Error: ${resultado.error || "Desconocido"}`);
+      console.error("Error completo:", resultado);
     }
   };
+
 
   return (
     <main style={{ padding: "2rem" }}>
