@@ -20,6 +20,8 @@ app.use("/api", usuarioRoutes);
 
 // Archivos estáticos
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/asistencia", require("./routes/asistenciaRoutes"));
+
 
 // Iniciar servidor
 app.listen(PORT, () => {
