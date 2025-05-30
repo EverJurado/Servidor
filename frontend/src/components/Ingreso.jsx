@@ -98,4 +98,5 @@ export const Ingreso = () => {
       </form>
     </main>
   );
+  
 };

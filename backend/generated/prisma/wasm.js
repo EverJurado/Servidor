@@ -122,7 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UsuariosScalarFieldEnum = {
   id_usuario: 'id_usuario',
-  rol: 'rol',
+  id_rol: 'id_rol',
   nombre: 'nombre',
   apellidopaterno: 'apellidopaterno',
   apellidomaterno: 'apellidomaterno',
@@ -150,7 +150,10 @@ exports.Prisma.EventosScalarFieldEnum = {
   modalidad: 'modalidad',
   ubicacion: 'ubicacion',
   link_reunion: 'link_reunion',
-  reunion_iniciada: 'reunion_iniciada'
+  reunion_iniciada: 'reunion_iniciada',
+  categoria: 'categoria',
+  latitud: 'latitud',
+  longitud: 'longitud'
 };
 
 exports.Prisma.ExpositoresScalarFieldEnum = {

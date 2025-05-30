@@ -10,7 +10,7 @@ datasource db {
 
 model usuarios {
   id_usuario      Int      @id @default(autoincrement())
-  rol             String?
+  id_rol          String?
   nombre          String?
   apellidopaterno String?
   apellidomaterno String?
@@ -41,6 +41,9 @@ model eventos {
   ubicacion        String?
   link_reunion     String?
   reunion_iniciada Boolean?
+  categoria        String? // <-- agregado
+  latitud          Float? // <-- agregado
+  longitud         Float? // <-- agregado
 
   agenda         agenda[]
   expositores    eventos_expositores[]
@@ -86,9 +89,10 @@ model eventos_patrocinadores {
 }
 
 model agenda {
-  id_agenda    Int       @id @default(autoincrement())
-  id_usuario   Int
-  id_evento    Int
+  id_agenda  Int @id @default(autoincrement())
+  id_usuario Int // Debe existir en la tabla usuarios
+  id_evento  Int // Debe existir en la tabla eventos
+
   actividad    String?
   fecha        DateTime?
   comentario   String?
@@ -96,6 +100,10 @@ model agenda {
   asistio      Boolean?
   hora_ingreso DateTime?
 
-  usuario usuarios @relation(fields: [id_usuario], references: [id_usuario])
-  evento  eventos  @relation(fields: [id_evento], references: [id_evento])
+  // Relaciones
+  usuario usuarios @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade)
+  evento  eventos  @relation(fields: [id_evento], references: [id_evento], onDelete: Cascade)
+
+  @@index([id_usuario])
+  @@index([id_evento])
 }

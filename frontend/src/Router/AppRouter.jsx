@@ -14,6 +14,8 @@ import Chat from '../pages/chat';
 import Dashboard from '../pages/dashboard'; // o la ruta correcta
 import DashboardUsuario from "../pages/dashboard/dashboard_usuarios";
 import DashboardEvento from "../pages/dashboard/dashboard_eventos";
+import { Asistencia } from "../pages/asistencia"; // asegúrate de que el path sea correcto
+
 
 
 
@@ -37,6 +39,9 @@ export const AppRouter = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/usuarios" element={<DashboardUsuario />} />
             <Route path="/dashboard/eventos" element={<DashboardEvento />} />
+            <Route path="/asistencia/:id_evento" element={<Asistencia />} />
+            
+
 
         </Routes>
     )

@@ -12,7 +12,7 @@ export const MostrarEventosForm = () => {
 
     useEffect(() => {
         const query = new URLSearchParams(filtros).toString();
-        fetch(`http://localhost:5000/api/eventos?${query}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/eventos?${query}`)
             .then(res => res.json())
             .then(data => setEventos(data))
             .catch(err => console.error("Error al obtener eventos:", err));
@@ -23,7 +23,7 @@ export const MostrarEventosForm = () => {
         const id_usuario = localStorage.getItem("id_usuario");
         if (!id_usuario) return alert("Debes iniciar sesión");
 
-        await fetch("http://localhost:5000/api/agenda", {
+        await  fetch(`${import.meta.env.VITE_API_URL}/api/agenda`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id_usuario, id_evento, actividad: "Registro" }),

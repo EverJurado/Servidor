@@ -1580,7 +1580,7 @@ export namespace Prisma {
 
   export type UsuariosMinAggregateOutputType = {
     id_usuario: number | null
-    rol: string | null
+    id_rol: string | null
     nombre: string | null
     apellidopaterno: string | null
     apellidomaterno: string | null
@@ -1598,7 +1598,7 @@ export namespace Prisma {
 
   export type UsuariosMaxAggregateOutputType = {
     id_usuario: number | null
-    rol: string | null
+    id_rol: string | null
     nombre: string | null
     apellidopaterno: string | null
     apellidomaterno: string | null
@@ -1616,7 +1616,7 @@ export namespace Prisma {
 
   export type UsuariosCountAggregateOutputType = {
     id_usuario: number
-    rol: number
+    id_rol: number
     nombre: number
     apellidopaterno: number
     apellidomaterno: number
@@ -1646,7 +1646,7 @@ export namespace Prisma {
 
   export type UsuariosMinAggregateInputType = {
     id_usuario?: true
-    rol?: true
+    id_rol?: true
     nombre?: true
     apellidopaterno?: true
     apellidomaterno?: true
@@ -1664,7 +1664,7 @@ export namespace Prisma {
 
   export type UsuariosMaxAggregateInputType = {
     id_usuario?: true
-    rol?: true
+    id_rol?: true
     nombre?: true
     apellidopaterno?: true
     apellidomaterno?: true
@@ -1682,7 +1682,7 @@ export namespace Prisma {
 
   export type UsuariosCountAggregateInputType = {
     id_usuario?: true
-    rol?: true
+    id_rol?: true
     nombre?: true
     apellidopaterno?: true
     apellidomaterno?: true
@@ -1787,7 +1787,7 @@ export namespace Prisma {
 
   export type UsuariosGroupByOutputType = {
     id_usuario: number
-    rol: string | null
+    id_rol: string | null
     nombre: string | null
     apellidopaterno: string | null
     apellidomaterno: string | null
@@ -1824,7 +1824,7 @@ export namespace Prisma {
 
   export type usuariosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_usuario?: boolean
-    rol?: boolean
+    id_rol?: boolean
     nombre?: boolean
     apellidopaterno?: boolean
     apellidomaterno?: boolean
@@ -1844,7 +1844,7 @@ export namespace Prisma {
 
   export type usuariosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_usuario?: boolean
-    rol?: boolean
+    id_rol?: boolean
     nombre?: boolean
     apellidopaterno?: boolean
     apellidomaterno?: boolean
@@ -1862,7 +1862,7 @@ export namespace Prisma {
 
   export type usuariosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_usuario?: boolean
-    rol?: boolean
+    id_rol?: boolean
     nombre?: boolean
     apellidopaterno?: boolean
     apellidomaterno?: boolean
@@ -1880,7 +1880,7 @@ export namespace Prisma {
 
   export type usuariosSelectScalar = {
     id_usuario?: boolean
-    rol?: boolean
+    id_rol?: boolean
     nombre?: boolean
     apellidopaterno?: boolean
     apellidomaterno?: boolean
@@ -1896,7 +1896,7 @@ export namespace Prisma {
     reset_token?: boolean
   }
 
-  export type usuariosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_usuario" | "rol" | "nombre" | "apellidopaterno" | "apellidomaterno" | "email" | "contrasena" | "foto" | "telefono" | "pais" | "ciudad" | "genero" | "fechacreacion" | "verificado" | "reset_token", ExtArgs["result"]["usuarios"]>
+  export type usuariosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_usuario" | "id_rol" | "nombre" | "apellidopaterno" | "apellidomaterno" | "email" | "contrasena" | "foto" | "telefono" | "pais" | "ciudad" | "genero" | "fechacreacion" | "verificado" | "reset_token", ExtArgs["result"]["usuarios"]>
   export type usuariosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | usuarios$agendaArgs<ExtArgs>
     _count?: boolean | UsuariosCountOutputTypeDefaultArgs<ExtArgs>
@@ -1911,7 +1911,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id_usuario: number
-      rol: string | null
+      id_rol: string | null
       nombre: string | null
       apellidopaterno: string | null
       apellidomaterno: string | null
@@ -2350,7 +2350,7 @@ export namespace Prisma {
    */
   interface usuariosFieldRefs {
     readonly id_usuario: FieldRef<"usuarios", 'Int'>
-    readonly rol: FieldRef<"usuarios", 'String'>
+    readonly id_rol: FieldRef<"usuarios", 'String'>
     readonly nombre: FieldRef<"usuarios", 'String'>
     readonly apellidopaterno: FieldRef<"usuarios", 'String'>
     readonly apellidomaterno: FieldRef<"usuarios", 'String'>
@@ -2808,10 +2808,14 @@ export namespace Prisma {
 
   export type EventosAvgAggregateOutputType = {
     id_evento: number | null
+    latitud: number | null
+    longitud: number | null
   }
 
   export type EventosSumAggregateOutputType = {
     id_evento: number | null
+    latitud: number | null
+    longitud: number | null
   }
 
   export type EventosMinAggregateOutputType = {
@@ -2827,6 +2831,9 @@ export namespace Prisma {
     ubicacion: string | null
     link_reunion: string | null
     reunion_iniciada: boolean | null
+    categoria: string | null
+    latitud: number | null
+    longitud: number | null
   }
 
   export type EventosMaxAggregateOutputType = {
@@ -2842,6 +2849,9 @@ export namespace Prisma {
     ubicacion: string | null
     link_reunion: string | null
     reunion_iniciada: boolean | null
+    categoria: string | null
+    latitud: number | null
+    longitud: number | null
   }
 
   export type EventosCountAggregateOutputType = {
@@ -2857,16 +2867,23 @@ export namespace Prisma {
     ubicacion: number
     link_reunion: number
     reunion_iniciada: number
+    categoria: number
+    latitud: number
+    longitud: number
     _all: number
   }
 
 
   export type EventosAvgAggregateInputType = {
     id_evento?: true
+    latitud?: true
+    longitud?: true
   }
 
   export type EventosSumAggregateInputType = {
     id_evento?: true
+    latitud?: true
+    longitud?: true
   }
 
   export type EventosMinAggregateInputType = {
@@ -2882,6 +2899,9 @@ export namespace Prisma {
     ubicacion?: true
     link_reunion?: true
     reunion_iniciada?: true
+    categoria?: true
+    latitud?: true
+    longitud?: true
   }
 
   export type EventosMaxAggregateInputType = {
@@ -2897,6 +2917,9 @@ export namespace Prisma {
     ubicacion?: true
     link_reunion?: true
     reunion_iniciada?: true
+    categoria?: true
+    latitud?: true
+    longitud?: true
   }
 
   export type EventosCountAggregateInputType = {
@@ -2912,6 +2935,9 @@ export namespace Prisma {
     ubicacion?: true
     link_reunion?: true
     reunion_iniciada?: true
+    categoria?: true
+    latitud?: true
+    longitud?: true
     _all?: true
   }
 
@@ -3014,6 +3040,9 @@ export namespace Prisma {
     ubicacion: string | null
     link_reunion: string | null
     reunion_iniciada: boolean | null
+    categoria: string | null
+    latitud: number | null
+    longitud: number | null
     _count: EventosCountAggregateOutputType | null
     _avg: EventosAvgAggregateOutputType | null
     _sum: EventosSumAggregateOutputType | null
@@ -3048,6 +3077,9 @@ export namespace Prisma {
     ubicacion?: boolean
     link_reunion?: boolean
     reunion_iniciada?: boolean
+    categoria?: boolean
+    latitud?: boolean
+    longitud?: boolean
     agenda?: boolean | eventos$agendaArgs<ExtArgs>
     expositores?: boolean | eventos$expositoresArgs<ExtArgs>
     patrocinadores?: boolean | eventos$patrocinadoresArgs<ExtArgs>
@@ -3067,6 +3099,9 @@ export namespace Prisma {
     ubicacion?: boolean
     link_reunion?: boolean
     reunion_iniciada?: boolean
+    categoria?: boolean
+    latitud?: boolean
+    longitud?: boolean
   }, ExtArgs["result"]["eventos"]>
 
   export type eventosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3082,6 +3117,9 @@ export namespace Prisma {
     ubicacion?: boolean
     link_reunion?: boolean
     reunion_iniciada?: boolean
+    categoria?: boolean
+    latitud?: boolean
+    longitud?: boolean
   }, ExtArgs["result"]["eventos"]>
 
   export type eventosSelectScalar = {
@@ -3097,9 +3135,12 @@ export namespace Prisma {
     ubicacion?: boolean
     link_reunion?: boolean
     reunion_iniciada?: boolean
+    categoria?: boolean
+    latitud?: boolean
+    longitud?: boolean
   }
 
-  export type eventosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_evento" | "titulo" | "descripcion" | "foto_evento" | "hora_inicio" | "hora_fin" | "fecha" | "costo" | "modalidad" | "ubicacion" | "link_reunion" | "reunion_iniciada", ExtArgs["result"]["eventos"]>
+  export type eventosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_evento" | "titulo" | "descripcion" | "foto_evento" | "hora_inicio" | "hora_fin" | "fecha" | "costo" | "modalidad" | "ubicacion" | "link_reunion" | "reunion_iniciada" | "categoria" | "latitud" | "longitud", ExtArgs["result"]["eventos"]>
   export type eventosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agenda?: boolean | eventos$agendaArgs<ExtArgs>
     expositores?: boolean | eventos$expositoresArgs<ExtArgs>
@@ -3129,6 +3170,9 @@ export namespace Prisma {
       ubicacion: string | null
       link_reunion: string | null
       reunion_iniciada: boolean | null
+      categoria: string | null
+      latitud: number | null
+      longitud: number | null
     }, ExtArgs["result"]["eventos"]>
     composites: {}
   }
@@ -3567,6 +3611,9 @@ export namespace Prisma {
     readonly ubicacion: FieldRef<"eventos", 'String'>
     readonly link_reunion: FieldRef<"eventos", 'String'>
     readonly reunion_iniciada: FieldRef<"eventos", 'Boolean'>
+    readonly categoria: FieldRef<"eventos", 'String'>
+    readonly latitud: FieldRef<"eventos", 'Float'>
+    readonly longitud: FieldRef<"eventos", 'Float'>
   }
     
 
@@ -9537,7 +9584,7 @@ export namespace Prisma {
 
   export const UsuariosScalarFieldEnum: {
     id_usuario: 'id_usuario',
-    rol: 'rol',
+    id_rol: 'id_rol',
     nombre: 'nombre',
     apellidopaterno: 'apellidopaterno',
     apellidomaterno: 'apellidomaterno',
@@ -9568,7 +9615,10 @@ export namespace Prisma {
     modalidad: 'modalidad',
     ubicacion: 'ubicacion',
     link_reunion: 'link_reunion',
-    reunion_iniciada: 'reunion_iniciada'
+    reunion_iniciada: 'reunion_iniciada',
+    categoria: 'categoria',
+    latitud: 'latitud',
+    longitud: 'longitud'
   };
 
   export type EventosScalarFieldEnum = (typeof EventosScalarFieldEnum)[keyof typeof EventosScalarFieldEnum]
@@ -9725,7 +9775,7 @@ export namespace Prisma {
     OR?: usuariosWhereInput[]
     NOT?: usuariosWhereInput | usuariosWhereInput[]
     id_usuario?: IntFilter<"usuarios"> | number
-    rol?: StringNullableFilter<"usuarios"> | string | null
+    id_rol?: StringNullableFilter<"usuarios"> | string | null
     nombre?: StringNullableFilter<"usuarios"> | string | null
     apellidopaterno?: StringNullableFilter<"usuarios"> | string | null
     apellidomaterno?: StringNullableFilter<"usuarios"> | string | null
@@ -9744,7 +9794,7 @@ export namespace Prisma {
 
   export type usuariosOrderByWithRelationInput = {
     id_usuario?: SortOrder
-    rol?: SortOrderInput | SortOrder
+    id_rol?: SortOrderInput | SortOrder
     nombre?: SortOrderInput | SortOrder
     apellidopaterno?: SortOrderInput | SortOrder
     apellidomaterno?: SortOrderInput | SortOrder
@@ -9767,7 +9817,7 @@ export namespace Prisma {
     AND?: usuariosWhereInput | usuariosWhereInput[]
     OR?: usuariosWhereInput[]
     NOT?: usuariosWhereInput | usuariosWhereInput[]
-    rol?: StringNullableFilter<"usuarios"> | string | null
+    id_rol?: StringNullableFilter<"usuarios"> | string | null
     nombre?: StringNullableFilter<"usuarios"> | string | null
     apellidopaterno?: StringNullableFilter<"usuarios"> | string | null
     apellidomaterno?: StringNullableFilter<"usuarios"> | string | null
@@ -9785,7 +9835,7 @@ export namespace Prisma {
 
   export type usuariosOrderByWithAggregationInput = {
     id_usuario?: SortOrder
-    rol?: SortOrderInput | SortOrder
+    id_rol?: SortOrderInput | SortOrder
     nombre?: SortOrderInput | SortOrder
     apellidopaterno?: SortOrderInput | SortOrder
     apellidomaterno?: SortOrderInput | SortOrder
@@ -9811,7 +9861,7 @@ export namespace Prisma {
     OR?: usuariosScalarWhereWithAggregatesInput[]
     NOT?: usuariosScalarWhereWithAggregatesInput | usuariosScalarWhereWithAggregatesInput[]
     id_usuario?: IntWithAggregatesFilter<"usuarios"> | number
-    rol?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
+    id_rol?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
     nombre?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
     apellidopaterno?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
     apellidomaterno?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
@@ -9843,6 +9893,9 @@ export namespace Prisma {
     ubicacion?: StringNullableFilter<"eventos"> | string | null
     link_reunion?: StringNullableFilter<"eventos"> | string | null
     reunion_iniciada?: BoolNullableFilter<"eventos"> | boolean | null
+    categoria?: StringNullableFilter<"eventos"> | string | null
+    latitud?: FloatNullableFilter<"eventos"> | number | null
+    longitud?: FloatNullableFilter<"eventos"> | number | null
     agenda?: AgendaListRelationFilter
     expositores?: Eventos_expositoresListRelationFilter
     patrocinadores?: Eventos_patrocinadoresListRelationFilter
@@ -9861,6 +9914,9 @@ export namespace Prisma {
     ubicacion?: SortOrderInput | SortOrder
     link_reunion?: SortOrderInput | SortOrder
     reunion_iniciada?: SortOrderInput | SortOrder
+    categoria?: SortOrderInput | SortOrder
+    latitud?: SortOrderInput | SortOrder
+    longitud?: SortOrderInput | SortOrder
     agenda?: agendaOrderByRelationAggregateInput
     expositores?: eventos_expositoresOrderByRelationAggregateInput
     patrocinadores?: eventos_patrocinadoresOrderByRelationAggregateInput
@@ -9882,6 +9938,9 @@ export namespace Prisma {
     ubicacion?: StringNullableFilter<"eventos"> | string | null
     link_reunion?: StringNullableFilter<"eventos"> | string | null
     reunion_iniciada?: BoolNullableFilter<"eventos"> | boolean | null
+    categoria?: StringNullableFilter<"eventos"> | string | null
+    latitud?: FloatNullableFilter<"eventos"> | number | null
+    longitud?: FloatNullableFilter<"eventos"> | number | null
     agenda?: AgendaListRelationFilter
     expositores?: Eventos_expositoresListRelationFilter
     patrocinadores?: Eventos_patrocinadoresListRelationFilter
@@ -9900,6 +9959,9 @@ export namespace Prisma {
     ubicacion?: SortOrderInput | SortOrder
     link_reunion?: SortOrderInput | SortOrder
     reunion_iniciada?: SortOrderInput | SortOrder
+    categoria?: SortOrderInput | SortOrder
+    latitud?: SortOrderInput | SortOrder
+    longitud?: SortOrderInput | SortOrder
     _count?: eventosCountOrderByAggregateInput
     _avg?: eventosAvgOrderByAggregateInput
     _max?: eventosMaxOrderByAggregateInput
@@ -9923,6 +9985,9 @@ export namespace Prisma {
     ubicacion?: StringNullableWithAggregatesFilter<"eventos"> | string | null
     link_reunion?: StringNullableWithAggregatesFilter<"eventos"> | string | null
     reunion_iniciada?: BoolNullableWithAggregatesFilter<"eventos"> | boolean | null
+    categoria?: StringNullableWithAggregatesFilter<"eventos"> | string | null
+    latitud?: FloatNullableWithAggregatesFilter<"eventos"> | number | null
+    longitud?: FloatNullableWithAggregatesFilter<"eventos"> | number | null
   }
 
   export type expositoresWhereInput = {
@@ -10202,7 +10267,7 @@ export namespace Prisma {
   }
 
   export type usuariosCreateInput = {
-    rol?: string | null
+    id_rol?: string | null
     nombre?: string | null
     apellidopaterno?: string | null
     apellidomaterno?: string | null
@@ -10221,7 +10286,7 @@ export namespace Prisma {
 
   export type usuariosUncheckedCreateInput = {
     id_usuario?: number
-    rol?: string | null
+    id_rol?: string | null
     nombre?: string | null
     apellidopaterno?: string | null
     apellidomaterno?: string | null
@@ -10239,7 +10304,7 @@ export namespace Prisma {
   }
 
   export type usuariosUpdateInput = {
-    rol?: NullableStringFieldUpdateOperationsInput | string | null
+    id_rol?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     apellidopaterno?: NullableStringFieldUpdateOperationsInput | string | null
     apellidomaterno?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10258,7 +10323,7 @@ export namespace Prisma {
 
   export type usuariosUncheckedUpdateInput = {
     id_usuario?: IntFieldUpdateOperationsInput | number
-    rol?: NullableStringFieldUpdateOperationsInput | string | null
+    id_rol?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     apellidopaterno?: NullableStringFieldUpdateOperationsInput | string | null
     apellidomaterno?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10277,7 +10342,7 @@ export namespace Prisma {
 
   export type usuariosCreateManyInput = {
     id_usuario?: number
-    rol?: string | null
+    id_rol?: string | null
     nombre?: string | null
     apellidopaterno?: string | null
     apellidomaterno?: string | null
@@ -10294,7 +10359,7 @@ export namespace Prisma {
   }
 
   export type usuariosUpdateManyMutationInput = {
-    rol?: NullableStringFieldUpdateOperationsInput | string | null
+    id_rol?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     apellidopaterno?: NullableStringFieldUpdateOperationsInput | string | null
     apellidomaterno?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10312,7 +10377,7 @@ export namespace Prisma {
 
   export type usuariosUncheckedUpdateManyInput = {
     id_usuario?: IntFieldUpdateOperationsInput | number
-    rol?: NullableStringFieldUpdateOperationsInput | string | null
+    id_rol?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     apellidopaterno?: NullableStringFieldUpdateOperationsInput | string | null
     apellidomaterno?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10340,6 +10405,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     agenda?: agendaCreateNestedManyWithoutEventoInput
     expositores?: eventos_expositoresCreateNestedManyWithoutEventoInput
     patrocinadores?: eventos_patrocinadoresCreateNestedManyWithoutEventoInput
@@ -10358,6 +10426,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     agenda?: agendaUncheckedCreateNestedManyWithoutEventoInput
     expositores?: eventos_expositoresUncheckedCreateNestedManyWithoutEventoInput
     patrocinadores?: eventos_patrocinadoresUncheckedCreateNestedManyWithoutEventoInput
@@ -10375,6 +10446,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     agenda?: agendaUpdateManyWithoutEventoNestedInput
     expositores?: eventos_expositoresUpdateManyWithoutEventoNestedInput
     patrocinadores?: eventos_patrocinadoresUpdateManyWithoutEventoNestedInput
@@ -10393,6 +10467,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     agenda?: agendaUncheckedUpdateManyWithoutEventoNestedInput
     expositores?: eventos_expositoresUncheckedUpdateManyWithoutEventoNestedInput
     patrocinadores?: eventos_patrocinadoresUncheckedUpdateManyWithoutEventoNestedInput
@@ -10411,6 +10488,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
   }
 
   export type eventosUpdateManyMutationInput = {
@@ -10425,6 +10505,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type eventosUncheckedUpdateManyInput = {
@@ -10440,6 +10523,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type expositoresCreateInput = {
@@ -10759,7 +10845,7 @@ export namespace Prisma {
 
   export type usuariosCountOrderByAggregateInput = {
     id_usuario?: SortOrder
-    rol?: SortOrder
+    id_rol?: SortOrder
     nombre?: SortOrder
     apellidopaterno?: SortOrder
     apellidomaterno?: SortOrder
@@ -10782,7 +10868,7 @@ export namespace Prisma {
 
   export type usuariosMaxOrderByAggregateInput = {
     id_usuario?: SortOrder
-    rol?: SortOrder
+    id_rol?: SortOrder
     nombre?: SortOrder
     apellidopaterno?: SortOrder
     apellidomaterno?: SortOrder
@@ -10800,7 +10886,7 @@ export namespace Prisma {
 
   export type usuariosMinOrderByAggregateInput = {
     id_usuario?: SortOrder
-    rol?: SortOrder
+    id_rol?: SortOrder
     nombre?: SortOrder
     apellidopaterno?: SortOrder
     apellidomaterno?: SortOrder
@@ -10904,6 +10990,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type Eventos_expositoresListRelationFilter = {
     every?: eventos_expositoresWhereInput
     some?: eventos_expositoresWhereInput
@@ -10937,10 +11034,15 @@ export namespace Prisma {
     ubicacion?: SortOrder
     link_reunion?: SortOrder
     reunion_iniciada?: SortOrder
+    categoria?: SortOrder
+    latitud?: SortOrder
+    longitud?: SortOrder
   }
 
   export type eventosAvgOrderByAggregateInput = {
     id_evento?: SortOrder
+    latitud?: SortOrder
+    longitud?: SortOrder
   }
 
   export type eventosMaxOrderByAggregateInput = {
@@ -10956,6 +11058,9 @@ export namespace Prisma {
     ubicacion?: SortOrder
     link_reunion?: SortOrder
     reunion_iniciada?: SortOrder
+    categoria?: SortOrder
+    latitud?: SortOrder
+    longitud?: SortOrder
   }
 
   export type eventosMinOrderByAggregateInput = {
@@ -10971,10 +11076,15 @@ export namespace Prisma {
     ubicacion?: SortOrder
     link_reunion?: SortOrder
     reunion_iniciada?: SortOrder
+    categoria?: SortOrder
+    latitud?: SortOrder
+    longitud?: SortOrder
   }
 
   export type eventosSumOrderByAggregateInput = {
     id_evento?: SortOrder
+    latitud?: SortOrder
+    longitud?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10989,6 +11099,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type expositoresCountOrderByAggregateInput = {
@@ -11293,6 +11419,14 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type agendaUpdateManyWithoutEventoNestedInput = {
@@ -11717,6 +11851,22 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type agendaCreateWithoutUsuarioInput = {
     actividad?: string | null
     fecha?: Date | string | null
@@ -11956,6 +12106,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     agenda?: agendaCreateNestedManyWithoutEventoInput
     patrocinadores?: eventos_patrocinadoresCreateNestedManyWithoutEventoInput
   }
@@ -11973,6 +12126,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     agenda?: agendaUncheckedCreateNestedManyWithoutEventoInput
     patrocinadores?: eventos_patrocinadoresUncheckedCreateNestedManyWithoutEventoInput
   }
@@ -12025,6 +12181,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     agenda?: agendaUpdateManyWithoutEventoNestedInput
     patrocinadores?: eventos_patrocinadoresUpdateManyWithoutEventoNestedInput
   }
@@ -12042,6 +12201,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     agenda?: agendaUncheckedUpdateManyWithoutEventoNestedInput
     patrocinadores?: eventos_patrocinadoresUncheckedUpdateManyWithoutEventoNestedInput
   }
@@ -12118,6 +12280,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     agenda?: agendaCreateNestedManyWithoutEventoInput
     expositores?: eventos_expositoresCreateNestedManyWithoutEventoInput
   }
@@ -12135,6 +12300,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     agenda?: agendaUncheckedCreateNestedManyWithoutEventoInput
     expositores?: eventos_expositoresUncheckedCreateNestedManyWithoutEventoInput
   }
@@ -12183,6 +12351,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     agenda?: agendaUpdateManyWithoutEventoNestedInput
     expositores?: eventos_expositoresUpdateManyWithoutEventoNestedInput
   }
@@ -12200,6 +12371,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     agenda?: agendaUncheckedUpdateManyWithoutEventoNestedInput
     expositores?: eventos_expositoresUncheckedUpdateManyWithoutEventoNestedInput
   }
@@ -12227,7 +12401,7 @@ export namespace Prisma {
   }
 
   export type usuariosCreateWithoutAgendaInput = {
-    rol?: string | null
+    id_rol?: string | null
     nombre?: string | null
     apellidopaterno?: string | null
     apellidomaterno?: string | null
@@ -12245,7 +12419,7 @@ export namespace Prisma {
 
   export type usuariosUncheckedCreateWithoutAgendaInput = {
     id_usuario?: number
-    rol?: string | null
+    id_rol?: string | null
     nombre?: string | null
     apellidopaterno?: string | null
     apellidomaterno?: string | null
@@ -12278,6 +12452,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     expositores?: eventos_expositoresCreateNestedManyWithoutEventoInput
     patrocinadores?: eventos_patrocinadoresCreateNestedManyWithoutEventoInput
   }
@@ -12295,6 +12472,9 @@ export namespace Prisma {
     ubicacion?: string | null
     link_reunion?: string | null
     reunion_iniciada?: boolean | null
+    categoria?: string | null
+    latitud?: number | null
+    longitud?: number | null
     expositores?: eventos_expositoresUncheckedCreateNestedManyWithoutEventoInput
     patrocinadores?: eventos_patrocinadoresUncheckedCreateNestedManyWithoutEventoInput
   }
@@ -12316,7 +12496,7 @@ export namespace Prisma {
   }
 
   export type usuariosUpdateWithoutAgendaInput = {
-    rol?: NullableStringFieldUpdateOperationsInput | string | null
+    id_rol?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     apellidopaterno?: NullableStringFieldUpdateOperationsInput | string | null
     apellidomaterno?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12334,7 +12514,7 @@ export namespace Prisma {
 
   export type usuariosUncheckedUpdateWithoutAgendaInput = {
     id_usuario?: IntFieldUpdateOperationsInput | number
-    rol?: NullableStringFieldUpdateOperationsInput | string | null
+    id_rol?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     apellidopaterno?: NullableStringFieldUpdateOperationsInput | string | null
     apellidomaterno?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12373,6 +12553,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     expositores?: eventos_expositoresUpdateManyWithoutEventoNestedInput
     patrocinadores?: eventos_patrocinadoresUpdateManyWithoutEventoNestedInput
   }
@@ -12390,6 +12573,9 @@ export namespace Prisma {
     ubicacion?: NullableStringFieldUpdateOperationsInput | string | null
     link_reunion?: NullableStringFieldUpdateOperationsInput | string | null
     reunion_iniciada?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    latitud?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitud?: NullableFloatFieldUpdateOperationsInput | number | null
     expositores?: eventos_expositoresUncheckedUpdateManyWithoutEventoNestedInput
     patrocinadores?: eventos_patrocinadoresUncheckedUpdateManyWithoutEventoNestedInput
   }
