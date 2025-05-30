@@ -16,7 +16,8 @@ export const AgendaEventos = () => {
   }, []);
 
  const generarLinkQR = (id_evento) => {
-  return `https://servidor-evers-projects-79e22c43.vercel.app/pages/asistencia/${id_evento}`; // ✅ Esto apunta al frontend
+  return `${import.meta.env.VITE_FRONTEND_URL}/pages/asistencia/${id_evento}`;
+
 };
 
 
