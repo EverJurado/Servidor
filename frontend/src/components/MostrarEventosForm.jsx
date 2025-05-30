@@ -82,7 +82,7 @@ export const MostrarEventosForm = () => {
                     <img
                         src={
                             evento.foto_evento
-                            ? `http://localhost:5000/uploads/${evento.foto_evento}`
+                            ? `${import.meta.env.VITE_API_URL}/uploads/${evento.foto_evento}`
                             : "https://via.placeholder.com/300x200?text=Sin+imagen"
                         }
                         alt={evento.titulo}
