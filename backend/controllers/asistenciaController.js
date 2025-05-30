@@ -1,5 +1,6 @@
 // controllers/asistencia.js
 exports.registrarAsistencia = async (req, res) => {
+  const db = require("../config/db");
   const { id_usuario, id_evento } = req.body;
 
   try {
