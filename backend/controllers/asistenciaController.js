@@ -1,13 +1,12 @@
 // controllers/asistencia.js
 exports.registrarAsistencia = async (req, res) => {
-  const db = require("../config/db");
-  const { id_usuario, id_evento } = req.body;
+  const { id_usuario, id_evento, comentario, calificacion } = req.body;
 
   try {
     await db.query(
-      `INSERT INTO agenda (id_usuario, id_evento, actividad, fecha, asistio)
-       VALUES ($1, $2, 'Asistencia QR', CURRENT_DATE, true)`,
-      [id_usuario, id_evento]
+      `INSERT INTO agenda (id_usuario, id_evento, actividad, fecha, asistio, comentario, calificacion)
+       VALUES ($1, $2, 'Asistencia QR', CURRENT_DATE, true, $3, $4)`,
+      [id_usuario, id_evento, comentario, calificacion]
     );
     res.status(200).json({ mensaje: "Asistencia guardada" });
   } catch (error) {

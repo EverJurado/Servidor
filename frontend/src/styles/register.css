@@ -2,7 +2,11 @@
 main {
     display: flex;
     justify-content: center;
-    margin: 100px;
+    align-items: center;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    background: #f3f4f6;
+    box-sizing: border-box;
 }
 
 /* Contenedor para el captcha */
@@ -23,6 +27,7 @@ main {
     background: linear-gradient(135deg, #D52B1E, #FDB913, #007A33);
     color: white;
     animation: gradientShift 12s ease infinite;
+    background-size: 400% 400%;
 }
 
 /* Título del formulario */
@@ -40,7 +45,8 @@ main {
 }
 
 /* Estilos para los inputs y el botón */
-.input-container input, .form button {
+.input-container input,
+.form button {
     outline: none;
     border: 1px solid #e5e7eb;
     margin: 12px 0;
@@ -104,6 +110,18 @@ main {
     color: #007A33; /* Color verde bicentenario */
 }
 
+/* Enlace de recuperación */
+.recover-password {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.875rem;
+}
+
+.recover-password a {
+    color: #fff;
+    text-decoration: underline;
+}
+
 /* Mensajes de error */
 .texts {
     width: 100%;
@@ -121,13 +139,13 @@ main {
     text-align: center;
     width: 100%;
     max-width: 400px;
-    margin: 10px auto; /* Centra el mensaje */
+    margin: 10px auto;
     margin-top: 30px;
     margin-bottom: 30px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Eliminar el estilo de los botones de los inputs numéricos */
+/* Eliminar los botones de los inputs numéricos */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -139,4 +157,42 @@ input[type="number"]::-webkit-inner-spin-button {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    .form {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .form-title {
+        font-size: 1.2rem;
+    }
+
+    .submit {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .error-message {
+        font-size: 13px;
+        margin: 20px auto;
+    }
+
+    .signup-link,
+    .recover-password {
+        font-size: 0.8rem;
+    }
+
+    .ContainerCaptcha {
+        transform: scale(0.85);
+        transform-origin: top left;
+    }
+
+    .input-container input {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
 }
