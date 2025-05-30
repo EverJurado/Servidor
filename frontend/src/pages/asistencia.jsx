@@ -27,7 +27,8 @@ export const Asistencia = () => {
       return setMensaje("Credenciales inválidas.");
     }
 
-    const { id_usuario } = loginData;
+    const { id_usuario } = loginData.usuario;
+
 
     // 2. Registrar asistencia
     const resAsistencia = await fetch(`${import.meta.env.VITE_API_URL}/api/asistencia`, {
