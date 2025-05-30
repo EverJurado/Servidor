@@ -1,42 +1,71 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+// src/pages/asistencia.jsx
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 export const Asistencia = () => {
   const { id_evento } = useParams();
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ correo: "", password: "" });
+  const [mensaje, setMensaje] = useState("");
 
-  useEffect(() => {
-    const id_usuario = localStorage.getItem("id_usuario");
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    if (!id_usuario) {
-      // Guardar evento temporalmente y redirigir al login
-      sessionStorage.setItem("evento_a_guardar", id_evento);
-      navigate("/login"); // Asegúrate de tener esta ruta
-      return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // 1. Validar credenciales
+    const resLogin = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const loginData = await resLogin.json();
+
+    if (!resLogin.ok) {
+      return setMensaje("Credenciales inválidas.");
     }
 
-    // Usuario ya logueado
-    registrarAsistencia(id_evento, id_usuario);
-  }, []);
+    const { id_usuario } = loginData;
 
-  const registrarAsistencia = async (id_evento, id_usuario) => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/asistencia`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id_evento, id_usuario })
-      });
+    // 2. Registrar asistencia
+    const resAsistencia = await fetch(`${import.meta.env.VITE_API_URL}/api/asistencia`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_usuario, id_evento }),
+    });
 
-      const data = await res.json();
-      if (data.success) {
-        alert("✅ Asistencia registrada correctamente");
-      } else {
-        alert("⚠️ " + data.error);
-      }
-    } catch (err) {
-      alert("❌ Error al registrar asistencia");
+    if (resAsistencia.ok) {
+      setMensaje("¡Asistencia registrada exitosamente!");
+    } else {
+      setMensaje("Hubo un error al registrar tu asistencia.");
     }
   };
 
-  return <h2>Verificando asistencia...</h2>;
+  return (
+    <main style={{ padding: "2rem" }}>
+      <h2>Confirmar asistencia al evento</h2>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "300px" }}>
+        <input
+          type="email"
+          name="correo"
+          placeholder="Correo"
+          value={formData.correo}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Registrar asistencia</button>
+      </form>
+      {mensaje && <p>{mensaje}</p>}
+    </main>
+  );
 };
