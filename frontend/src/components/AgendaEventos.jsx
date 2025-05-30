@@ -15,9 +15,10 @@ export const AgendaEventos = () => {
       .catch(err => console.error("Error al cargar agenda:", err));
   }, []);
 
-  const generarLinkQR = (id_evento) => {
-    return `${import.meta.env.VITE_API_URL}/api/asistencia/${id_evento}`;
-  };
+ const generarLinkQR = (id_evento) => {
+  return `https://servidor-evers-projects-79e22c43.vercel.app/${id_evento}`; // ✅ Esto apunta al frontend
+};
+
 
   return (
     <main className="agenda-page">
