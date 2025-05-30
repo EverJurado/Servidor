@@ -66,62 +66,63 @@ export const RegisterForm = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMessage("");
+    e.preventDefault();
+    setErrorMessage("");
 
-        const captchaValue = captcha.current?.getValue() || ""; // <-- puede ser vacío
+    const captchaValue = captcha.current?.getValue() || ""; // capturamos el valor si existe, pero no es obligatorio
 
-        if (
-            !formData.nombre.trim() ||
-            !formData.apellidopaterno.trim() ||
-            !formData.apellidomaterno.trim() ||
-            !formData.email.trim() ||
-            !formData.password.trim() ||
-            !formData.genero ||
-            !formData.pais ||
-            !formData.ciudad
-        ) {
-            setErrorMessage("Por favor, completa todos los campos.");
+    if (
+        !formData.nombre.trim() ||
+        !formData.apellidopaterno.trim() ||
+        !formData.apellidomaterno.trim() ||
+        !formData.email.trim() ||
+        !formData.password.trim() ||
+        !formData.genero ||
+        !formData.pais ||
+        !formData.ciudad
+    ) {
+        setErrorMessage("Por favor, completa todos los campos.");
+        return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+        setErrorMessage("Las contraseñas no coinciden.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nombre: formData.nombre,
+                apellidopaterno: formData.apellidopaterno,
+                apellidomaterno: formData.apellidomaterno,
+                email: formData.email,
+                password: formData.password,
+                telefono: formData.telefono,
+                pais: formData.pais,
+                ciudad: formData.ciudad,
+                genero: formData.genero,
+                captchaToken: captchaValue // se envía, pero no se requiere
+            }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            setErrorMessage("Error: " + data.error);
             return;
         }
 
-        if (formData.password !== formData.confirmPassword) {
-            setErrorMessage("Las contraseñas no coinciden.");
-            return;
-        }
+        setShowModal(true);
+        setTimeout(() => navigate("/"), 2500);
+    } catch (error) {
+        console.error("Error al registrar:", error);
+        setErrorMessage("Error en el servidor.");
+    }
+};
 
-        try {
-            const response = await fetch("http://localhost:5000/api/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    nombre: formData.nombre,
-                    apellidopaterno: formData.apellidopaterno,
-                    apellidomaterno: formData.apellidomaterno,
-                    email: formData.email,
-                    password: formData.password,
-                    telefono: formData.telefono,
-                    pais: formData.pais,
-                    ciudad: formData.ciudad,
-                    genero: formData.genero,
-                    captchaToken: captchaValue // <-- envías el token si existe
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                setErrorMessage("Error: " + data.error);
-                return;
-            }
-
-            setShowModal(true);
-            setTimeout(() => navigate("/"), 2500);
-        } catch (error) {
-            console.error("Error al registrar:", error);
-            setErrorMessage("Error en el servidor.");
-        }
-    };
 
 
     return (
