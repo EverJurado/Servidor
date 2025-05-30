@@ -1,7 +1,7 @@
 // routes/asistenciaRoutes.js
 const express = require("express");
 const router = express.Router();
-const asistenciaController = require("../controllers/asistencia");
+const asistenciaController = require("../controllers/asistenciaController");
 
 router.post("/", asistenciaController.registrarAsistencia);
 
