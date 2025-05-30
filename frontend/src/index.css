@@ -63,54 +63,21 @@
 /* Adaptación del menú a móviles (solo si pantalla es pequeña) */
 @media (max-width: 768px) {
   .menu {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 10px;
     gap: 10px;
+    justify-content: flex-start;
   }
 
   .menu a,
   .menu button {
-    width: 100%;
-    text-align: center;
-    font-size: 15px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .language-dropdown {
+    flex: 0 0 auto;
   }
 }
-
-/* Estilo para el selector de idioma que ya usas */
-.language-dropdown {
-  position: relative;
-}
-
-.dropdown-toggle {
-  background: none;
-  color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #f7f7f7; /* mismo fondo que el root */
-  color: black;
-  border-radius: 5px;
-  list-style: none;
-  padding: 0.5rem 0;
-  margin-top: 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  min-width: 150px;
-}
-
-.dropdown-menu li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.dropdown-menu li:hover {
-  background-color: #e0e0e0;
-}
-
