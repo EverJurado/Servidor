@@ -48,18 +48,23 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { correo, password } = req.body;
+    const { correo, password, captchaToken } = req.body;
+
+    // Validar que captchaToken venga
+    if (!captchaToken) {
+        return res.status(400).json({ error: "Captcha es requerido" });
+    }
+
+    // Validar captcha con Google
+    const esValido = await validarCaptcha(captchaToken);
+    if (!esValido) {
+        return res.status(403).json({ error: "Captcha inválido" });
+    }
 
     try {
         const user = await UserModel.findUserByEmail(correo);
 
         if (!user) return res.status(400).json({ error: "Correo o contraseña incorrectos." });
-
-        console.log("DEBUG:", {
-            inputPassword: password,
-            storedHash: user.contrasena,
-            type: typeof user.contrasena
-        });
 
         const isValid = await bcrypt.compare(password, user.contrasena);
 
@@ -84,6 +89,7 @@ const login = async (req, res) => {
         res.status(500).json({ error: "Error en el servidor." });
     }
 };
+
 
 const confirmAccount = async (req, res) => {
     const { token } = req.params;
