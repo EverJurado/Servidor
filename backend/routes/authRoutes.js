@@ -1,18 +1,14 @@
 const express = require("express");
-//
 const multer = require("multer");
 const path = require("path");
-//
 const { register, login, confirmAccount, recoverPassword, resetPassword } = require("../controllers/authController");
-const { crearEvento , getEventos ,getTodos } = require("../controllers/eventController");
+const { crearEvento, getEventos, getTodos } = require("../controllers/eventController");
 const { getExpositores } = require("../controllers/expositorController");
 const { getPatrocinadores } = require("../controllers/patrocinadorController");
-const { registrarEnAgenda } = require("../controllers/agendaController");
-const { obtenerAgendaUsuario } = require("../controllers/agendaController");
+const { registrarEnAgenda, obtenerAgendaUsuario } = require("../controllers/agendaController");
 
 const router = express.Router();
 
-//
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -24,8 +20,6 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage });
-//
-
 
 router.post("/register", register);
 router.post("/login", login);
@@ -39,6 +33,5 @@ router.get("/eventos", getEventos);
 router.get("/eventos-todos", getTodos);
 router.post("/agenda", registrarEnAgenda);
 router.get("/agenda/:id_usuario", obtenerAgendaUsuario);
-
 
 module.exports = router;

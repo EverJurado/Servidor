@@ -1,5 +1,5 @@
 const EventoModel = require("../models/eventoModel");
-const UserModel = require("../models/userModel"); // importa el modelo usuario
+const UserModel = require("../models/userModel"); // Importa modelo usuario para obtener emails
 const nodemailer = require("nodemailer");
 
 const crearEvento = async (req, res) => {
@@ -27,13 +27,13 @@ const crearEvento = async (req, res) => {
     await EventoModel.vincularExpositores(id_evento, expositores);
     await EventoModel.vincularPatrocinadores(id_evento, patrocinadores);
 
-    // Obtener todos los emails de usuarios
-    const emails = await UserModel.getAllEmails(); // debe retornar array de strings
+    // Obtener todos los emails de usuarios registrados
+    const emails = await UserModel.getAllEmails(); // Debe retornar array de emails
 
     if (emails.length > 0) {
-      // Configura el transporter nodemailer (ajusta según tu SMTP o servicio)
+      // Configura el transporter de nodemailer (ajusta según tu SMTP)
       const transporter = nodemailer.createTransport({
-        service: "Gmail", // Cambia si usas otro servicio SMTP
+        service: "Gmail", // O el servicio SMTP que uses
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS,
@@ -43,7 +43,7 @@ const crearEvento = async (req, res) => {
       // Construye el correo
       const mailOptions = {
         from: process.env.EMAIL_USER,
-        bcc: emails, // envía a todos en BCC para privacidad
+        bcc: emails, // Envío en copia oculta para proteger privacidad
         subject: `Nuevo evento creado: ${nuevoEvento.titulo}`,
         html: `
           <h1>Se ha creado un nuevo evento</h1>
@@ -66,3 +66,25 @@ const crearEvento = async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor." });
   }
 };
+
+const getEventos = async (req, res) => {
+  try {
+    const eventos = await EventoModel.obtenerEventosConFiltros(req.query);
+    res.json(eventos);
+  } catch (error) {
+    console.error("Error al obtener eventos:", error);
+    res.status(500).json({ error: "Error al obtener eventos" });
+  }
+};
+
+const getTodos = async (req, res) => {
+  try {
+    const eventos = await EventoModel.obtenerTodosLosEventos();
+    res.json(eventos);
+  } catch (error) {
+    console.error("Error al obtener eventos:", error);
+    res.status(500).json({ error: "Error al obtener eventos" });
+  }
+};
+
+module.exports = { crearEvento, getEventos, getTodos };
