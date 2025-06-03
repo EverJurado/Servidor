@@ -1,13 +1,13 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
+import CaptchaMatematico from "./CaptchaMatematico"; // Importa el componente matemático
 import "../styles/register.css";
 
 export const Ingreso = () => {
-  const captcha = useRef(null);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ correo: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
+  const [captchaValido, setCaptchaValido] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,16 +17,16 @@ export const Ingreso = () => {
     e.preventDefault();
     setErrorMessage("");
 
-    const captchaValue = captcha.current?.getValue() || ""; // <-- puede estar vacío
+    if (!captchaValido) {
+      setErrorMessage("Por favor, resuelve el captcha correctamente.");
+      return;
+    }
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          captchaToken: captchaValue // <-- lo mandas igual pero puede ser ""
-        }),
+        body: JSON.stringify({ ...formData }), // No enviamos token de captcha, es local
       });
 
       const data = await response.json();
@@ -42,14 +42,13 @@ export const Ingreso = () => {
 
       window.location.href =
         data.usuario.id_rol === 3 ? "/dashboard" :
-          data.usuario.id_rol === 2 ? "/expositor" :
-            "/";
+        data.usuario.id_rol === 2 ? "/expositor" :
+        "/";
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       setErrorMessage("Error en el servidor.");
     }
   };
-
 
   return (
     <main>
@@ -65,6 +64,7 @@ export const Ingreso = () => {
             name="correo"
             value={formData.correo}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -75,14 +75,12 @@ export const Ingreso = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            required
           />
         </div>
 
-        <ReCAPTCHA
-          ref={captcha}
-          sitekey={`${import.meta.env.VITE_RECAPTCHA_SITE_KEY}`}
-        />
-
+        {/* Aquí el captcha matemático */}
+        <CaptchaMatematico onValid={setCaptchaValido} />
 
         <button className="submit" type="submit">
           Iniciar sesión
@@ -97,5 +95,4 @@ export const Ingreso = () => {
       </form>
     </main>
   );
-
 };

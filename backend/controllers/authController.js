@@ -47,19 +47,8 @@ const register = async (req, res) => {
     }
 };
 
-const { validarCaptcha } = require("../utils/captcha");
-
 const login = async (req, res) => {
-  const { correo, password, captchaToken } = req.body;
-
-  if (!captchaToken) {
-    return res.status(400).json({ error: "Captcha es requerido" });
-  }
-
-  const esValido = await validarCaptcha(captchaToken);
-  if (!esValido) {
-    return res.status(403).json({ error: "Captcha inválido" });
-  }
+  const { correo, password } = req.body;
 
   try {
     const user = await UserModel.findUserByEmail(correo);
@@ -89,6 +78,7 @@ const login = async (req, res) => {
     res.status(500).json({ error: "Error en el servidor." });
   }
 };
+
 
 
 
