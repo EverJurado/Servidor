@@ -6,6 +6,7 @@ const { crearEvento, getEventos, getTodos } = require("../controllers/eventContr
 const { getExpositores } = require("../controllers/expositorController");
 const { getPatrocinadores } = require("../controllers/patrocinadorController");
 const { registrarEnAgenda, obtenerAgendaUsuario } = require("../controllers/agendaController");
+const { getEventosConStats } = require("../controllers/eventController");
 
 const router = express.Router();
 
@@ -33,5 +34,8 @@ router.get("/eventos", getEventos);
 router.get("/eventos-todos", getTodos);
 router.post("/agenda", registrarEnAgenda);
 router.get("/agenda/:id_usuario", obtenerAgendaUsuario);
+
+router.get("/eventos-con-stats", getEventosConStats);
+
 
 module.exports = router;
