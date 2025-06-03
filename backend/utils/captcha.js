@@ -1,4 +1,3 @@
-// utils/captcha.js
 const fetch = require("node-fetch");
 
 async function validarCaptcha(token) {

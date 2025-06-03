@@ -47,48 +47,49 @@ const register = async (req, res) => {
     }
 };
 
+const { validarCaptcha } = require("../utils/captcha");
+
 const login = async (req, res) => {
-    const { correo, password, captchaToken } = req.body;
+  const { correo, password, captchaToken } = req.body;
 
-    // Validar que captchaToken venga
-    if (!captchaToken) {
-        return res.status(400).json({ error: "Captcha es requerido" });
-    }
+  if (!captchaToken) {
+    return res.status(400).json({ error: "Captcha es requerido" });
+  }
 
-    // Validar captcha con Google
-    const esValido = await validarCaptcha(captchaToken);
-    if (!esValido) {
-        return res.status(403).json({ error: "Captcha inválido" });
-    }
+  const esValido = await validarCaptcha(captchaToken);
+  if (!esValido) {
+    return res.status(403).json({ error: "Captcha inválido" });
+  }
 
-    try {
-        const user = await UserModel.findUserByEmail(correo);
+  try {
+    const user = await UserModel.findUserByEmail(correo);
 
-        if (!user) return res.status(400).json({ error: "Correo o contraseña incorrectos." });
+    if (!user) return res.status(400).json({ error: "Correo o contraseña incorrectos." });
 
-        const isValid = await bcrypt.compare(password, user.contrasena);
+    const isValid = await bcrypt.compare(password, user.contrasena);
 
-        if (!isValid) return res.status(400).json({ error: "Correo o contraseña incorrectos." });
+    if (!isValid) return res.status(400).json({ error: "Correo o contraseña incorrectos." });
 
-        if (!user.verificado) return res.status(400).json({ error: "Cuenta no verificada." });
+    if (!user.verificado) return res.status(400).json({ error: "Cuenta no verificada." });
 
-        const token = generateToken({ id: user.id_usuario });
+    const token = generateToken({ id: user.id_usuario });
 
-        res.json({
-            message: "Inicio de sesión exitoso",
-            token,
-            usuario: {
-                id_usuario: user.id_usuario,
-                nombre: user.nombre,
-                email: user.email,
-                id_rol: user.id_rol
-            }
-        });
-    } catch (error) {
-        console.error("Error en el login:", error.message);
-        res.status(500).json({ error: "Error en el servidor." });
-    }
+    res.json({
+      message: "Inicio de sesión exitoso",
+      token,
+      usuario: {
+        id_usuario: user.id_usuario,
+        nombre: user.nombre,
+        email: user.email,
+        id_rol: user.id_rol,
+      },
+    });
+  } catch (error) {
+    console.error("Error en el login:", error.message);
+    res.status(500).json({ error: "Error en el servidor." });
+  }
 };
+
 
 
 const confirmAccount = async (req, res) => {
