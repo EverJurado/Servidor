@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import CaptchaMatematico from "./CaptchaMatematico"; // Importa el componente matemático
+import CaptchaMatematico from "./captchaMatematico"; // Importa el componente matemático
 import "../styles/register.css";
 
 export const Ingreso = () => {
