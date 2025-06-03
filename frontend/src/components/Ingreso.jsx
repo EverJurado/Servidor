@@ -80,7 +80,7 @@ export const Ingreso = () => {
 
         <ReCAPTCHA
           ref={captcha}
-          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+          sitekey={`${import.meta.env.VITE_RECAPTCHA_SITE_KEY}`}
         />
 
 
