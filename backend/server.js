@@ -6,7 +6,7 @@ const path = require("path");
 const authRoutes = require("./routes/authRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const usuarioRoutes = require("./routes/usuarioRoutes");
-const eventoRoutes = require("./routes/evenotRoutes");
+const eventoRoutes = require("./routes/eventoRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
