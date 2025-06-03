@@ -10,7 +10,7 @@ datasource db {
 
 model usuarios {
   id_usuario      Int      @id @default(autoincrement())
-  id_rol          String?
+  id_rol          Int?
   nombre          String?
   apellidopaterno String?
   apellidomaterno String?

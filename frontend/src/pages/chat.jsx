@@ -13,7 +13,7 @@ function Chat() {
     setMensajes(prev => [...prev, { tipo: 'user', texto: pregunta }]);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/chat', { pregunta });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/chat`, { pregunta });
       setMensajes(prev => [...prev, { tipo: 'bot', texto: res.data.respuesta }]);
     } catch (error) {
       setMensajes(prev => [...prev, {

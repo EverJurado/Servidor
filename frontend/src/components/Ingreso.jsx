@@ -78,12 +78,11 @@ export const Ingreso = () => {
           />
         </div>
 
-        <div className="ContainerCaptcha">
-          <ReCAPTCHA
-            ref={captcha}
-            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-          />
-        </div>
+        <ReCAPTCHA
+          ref={captcha}
+          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+        />
+
 
         <button className="submit" type="submit">
           Iniciar sesión
@@ -98,5 +97,5 @@ export const Ingreso = () => {
       </form>
     </main>
   );
-  
+
 };
