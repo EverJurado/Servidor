@@ -1,12 +1,11 @@
 const express = require("express");
-const router = express.Router();
-const { crearEvento, getEventos, getTodos, getEventosCompletos } = require("../controllers/eventController");
+const { crearEvento, getEventos, getTodos, getEventosConStats } = require("../controllers/eventController");
 
-router.post("/eventos", crearEvento);
+const router = express.Router();
+
+router.post("/crear-evento", crearEvento);
 router.get("/eventos", getEventos);
 router.get("/eventos-todos", getTodos);
-
-// ✅ NUEVA RUTA
-router.get("/eventos-completos", getEventosCompletos);
+router.get("/eventos-con-stats", getEventosConStats); // <== Aquí agregas la nueva ruta
 
 module.exports = router;
