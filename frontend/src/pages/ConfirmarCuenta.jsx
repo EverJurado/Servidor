@@ -9,7 +9,7 @@ export const ConfirmarCuenta = () => {
     useEffect(() => {
         const confirmarRegistro = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/confirmar/${token}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/confirmar/${token}`);
                 const data = await response.json();
 
                 if (response.ok) {

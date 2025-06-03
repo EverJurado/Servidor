@@ -1,4 +1,5 @@
 const EventoModel = require("../models/eventoModel");
+const UserModel = require("../models/userModel"); // importa el modelo usuario
 const nodemailer = require("nodemailer");
 
 const crearEvento = async (req, res) => {
@@ -26,32 +27,38 @@ const crearEvento = async (req, res) => {
     await EventoModel.vincularExpositores(id_evento, expositores);
     await EventoModel.vincularPatrocinadores(id_evento, patrocinadores);
 
-    // Configura el transporter nodemailer (ajusta según tu SMTP o servicio)
-    const transporter = nodemailer.createTransport({
-      service: "Gmail", // Cambia si usas otro servicio
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    // Obtener todos los emails de usuarios
+    const emails = await UserModel.getAllEmails(); // debe retornar array de strings
 
-    // Construye el correo
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: "destinatario@tudominio.com", // Cambia al correo o lista que desees
-      subject: `Nuevo evento creado: ${nuevoEvento.titulo}`,
-      html: `
-        <h1>Se ha creado un nuevo evento</h1>
-        <p><strong>Título:</strong> ${nuevoEvento.titulo}</p>
-        <p><strong>Fecha:</strong> ${nuevoEvento.fecha}</p>
-        <p><strong>Hora de inicio:</strong> ${nuevoEvento.hora_inicio}</p>
-        <p><strong>Ubicación:</strong> ${nuevoEvento.ubicacion}</p>
-        <p><strong>Descripción:</strong> ${nuevoEvento.descripcion}</p>
-      `,
-    };
+    if (emails.length > 0) {
+      // Configura el transporter nodemailer (ajusta según tu SMTP o servicio)
+      const transporter = nodemailer.createTransport({
+        service: "Gmail", // Cambia si usas otro servicio SMTP
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
-    // Envía el correo (puedes usar await o .then/.catch)
-    await transporter.sendMail(mailOptions);
+      // Construye el correo
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        bcc: emails, // envía a todos en BCC para privacidad
+        subject: `Nuevo evento creado: ${nuevoEvento.titulo}`,
+        html: `
+          <h1>Se ha creado un nuevo evento</h1>
+          <p><strong>Título:</strong> ${nuevoEvento.titulo}</p>
+          <p><strong>Fecha:</strong> ${nuevoEvento.fecha}</p>
+          <p><strong>Hora de inicio:</strong> ${nuevoEvento.hora_inicio}</p>
+          <p><strong>Ubicación:</strong> ${nuevoEvento.ubicacion}</p>
+          <p><strong>Descripción:</strong> ${nuevoEvento.descripcion}</p>
+          <p>¡No te pierdas este evento!</p>
+        `,
+      };
+
+      // Envía el correo
+      await transporter.sendMail(mailOptions);
+    }
 
     res.status(201).json({ message: "Evento creado exitosamente", evento: nuevoEvento });
   } catch (error) {
@@ -59,25 +66,3 @@ const crearEvento = async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor." });
   }
 };
-
-const getEventos = async (req, res) => {
-  try {
-    const eventos = await EventoModel.obtenerEventosConFiltros(req.query);
-    res.json(eventos);
-  } catch (error) {
-    console.error("Error al obtener eventos:", error);
-    res.status(500).json({ error: "Error al obtener eventos" });
-  }
-};
-
-const getTodos = async (req, res) => {
-  try {
-    const eventos = await EventoModel.obtenerTodosLosEventos();
-    res.json(eventos);
-  } catch (error) {
-    console.error("Error al obtener eventos:", error);
-    res.status(500).json({ error: "Error al obtener eventos" });
-  }
-};
-
-module.exports = { crearEvento, getEventos, getTodos };

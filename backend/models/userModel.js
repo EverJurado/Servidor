@@ -49,6 +49,13 @@ class UserModel {
         const query = "UPDATE usuarios SET contrasena = $1, reset_token = NULL WHERE id_usuario = $2";
         await pool.query(query, [password, userId]);
     }
+
+    static async getAllEmails() {
+        const query = "SELECT email FROM usuarios WHERE email IS NOT NULL AND email <> ''";
+        const result = await pool.query(query);
+        // Devuelve un array con los emails
+        return result.rows.map(row => row.email);
+    }
 }
 
 module.exports = UserModel;
